@@ -87,6 +87,14 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'GWMR',
+    date: 'March 8th, 2018',
+    firstParagraph: 'All girl band',
+    secondParagraph: 'Based in PHX',
+    thirdParagraph: 'Original Music'
+
   }
 ];
 
@@ -115,3 +123,49 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+const articles = document.querySelector('.articles');
+
+function articleMaker({ date, title, firstParagraph, secondParagraph, thirdParagraph }) {
+  const article = document.createElement('div');
+  const articleHeading = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const articleFirst = document.createElement('p');
+  const articleSecond = document.createElement('p');
+  const articleThird = document.createElement('p');
+  const expandButton = document.createElement('button');
+  
+
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  expandButton.classList.add('close');
+
+  article.appendChild(articleHeading);
+  article.appendChild(articleDate);
+  article.appendChild(articleFirst);
+  article.appendChild(articleSecond);
+  article.appendChild(articleThird);
+  article.appendChild(expandButton);
+
+  articleHeading.textContent = title;
+  articleDate.textContent = date;
+  articleFirst.textContent = firstParagraph;
+  articleSecond.textContent = secondParagraph;
+  articleThird.textContent = thirdParagraph;
+  expandButton.textContent = '+';
+
+  expandButton.addEventListener('click', () => {
+  article.classList.toggle('article-open');
+  })
+  return article;
+}
+
+const articleElements = data.map(article => {
+  return articleMaker(article);
+})
+
+articleElements.forEach(elem => {
+  articles.appendChild(elem);
+})
+
+
